@@ -95,6 +95,14 @@ pipeline {
             }
         }
 
+        stage('Aproval') {
+            steps {
+                timeout(time: 1, 'HOURS') {
+                    input message: 'Deploy to production?', ok: 'Yes, i am sure!'
+                }
+            }
+        }
+
         stage('Deploy prod') {
             agent {
                 docker {
